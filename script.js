@@ -142,19 +142,15 @@ function drawClouds() {
     var y = Math.floor((Math.random()) * 300 + 1);
     var r = 50;
 
-    while (x > 300) {
-        
-    }
     ctx.save();
     ctx.scale(1, 0.5);
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.beginPath();    
     ctx.restore();
     ctx.fillStyle = "white";
     ctx.fill();
     ctx.closePath();
 }
-    
+   
 function start() {
     canvas = document.getElementById("myCanvas");
     ctx = canvas.getContext("2d");

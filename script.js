@@ -153,10 +153,13 @@ function drawSmoke() {
 }
     
 function drawClouds() {
-    var x = 0;
-    var y = 0;
+    var x = Math.floor((Math.random()) * 300 + 1);
+    var y = Math.floor((Math.random()) * 300 + 1);
     var r = 50;
 
+    while (x > 300) {
+        
+    }
     ctx.save();
     ctx.scale(1, 0.5);
     ctx.beginPath();
@@ -177,6 +180,9 @@ function start() {
     drawHouseFront();
     drawHouseLeft();
     drawRoof();
+    drawClouds();
+    drawClouds();
+    drawClouds();
     drawClouds();
     drawSmoke();
     drawChimney();

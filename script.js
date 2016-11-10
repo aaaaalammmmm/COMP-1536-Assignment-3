@@ -165,14 +165,9 @@ function drawSmoke() {
     ctx.closePath();
 }
     
-function drawClouds() {
-    var x = Math.floor((Math.random()) * 300 + 1);
-    var y = Math.floor((Math.random()) * 300 + 1);
+function drawClouds(x, y) {
     var r = 50;
 
-    while (x > 300) {
-        
-    }
     ctx.save();
     ctx.scale(1, 0.5);
     ctx.beginPath();
@@ -199,6 +194,13 @@ function drawWindows() {
     ctx.fill();
     ctx.closePath();
 }
+  
+function moveClouds() {
+    var x = Math.floor((Math.random()) * 300 + 1);
+    var y = Math.floor((Math.random()) * 300 + 1);
+    
+    setInterval (drawClouds(x, y), 1000);
+}
 
 function start() {
     canvas = document.getElementById("myCanvas");
@@ -210,11 +212,10 @@ function start() {
     drawHouseFront();
     drawHouseLeft();
     drawRoof();
-    drawClouds();
-    drawClouds();
-    drawClouds();
-    drawClouds();
-    drawSmoke();
+    moveClouds();
+    moveClouds();
+    moveClouds();
+    //drawSmoke();
     drawChimney();
     drawDoor();
     drawWindows();

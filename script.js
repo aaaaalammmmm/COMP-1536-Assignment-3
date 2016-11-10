@@ -6,23 +6,10 @@ var ctx;
 var canvasWidth;
 var canvasHeight;
 
-function start() {
-    canvas = document.getElementById("myCanvas");
-    ctx = canvas.getContext("2d");
-    
-    canvasWidth = canvas.width;
-    canvasHeight = canvas.height;
-    drawBackground();
-    drawHouseFront();
-    drawHouseLeft();
-    drawRoof();
-    drawChimney();
-}
-
 function drawBackground() {
-    
     var rightPoint = 225;
-    var leftPoint = 200;
+    var leftPoint  = 200;
+
     //Grass
     ctx.beginPath();
     ctx.moveTo(0, canvasHeight);
@@ -45,11 +32,11 @@ function drawBackground() {
 }
 
 function drawHouseFront() {
-    var frontLeftX = 140;
-    var frontRightX = 340;
-    var topLeftY = 250;
+    var frontLeftX      = 140;
+    var frontRightX     = 340;
+    var topLeftY        = 250;
     var frontWallHeight = 110;
-    var topRightY = 240;
+    var topRightY       = 240;
     
     ctx.beginPath();
     ctx.moveTo(frontLeftX, topLeftY + frontWallHeight);
@@ -63,11 +50,11 @@ function drawHouseFront() {
 }
 
 function drawHouseLeft() {
-    var leftLeftX = 50;
+    var leftLeftX  = 50;
     var leftRightX = 140;
     
     var middleRightY = 250;
-    var middleLeftY = 240;
+    var middleLeftY  = 240;
     
     var leftSummitX = 80;
     var leftSummitY = 180;
@@ -123,4 +110,49 @@ function drawChimney() {
     ctx.fillStyle = "purple";
     ctx.fill();
     ctx.closePath();
+}
+
+function drawSmoke() {
+    var x = 50;
+    var y = 50;
+    var r = 50;
+
+    ctx.save();
+    ctx.scale(1, 0.5);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.restore();
+    ctx.fillStyle = "gery";
+    ctx.fill();
+    ctx.closePath();
+}
+    
+function drawClouds() {
+    var x = 0;
+    var y = 0;
+    var r = 50;
+
+    ctx.save();
+    ctx.scale(1, 0.5);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.restore();
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+}
+    
+function start() {
+    canvas = document.getElementById("myCanvas");
+    ctx    = canvas.getContext("2d");
+    
+    canvasWidth  = canvas.width;
+    canvasHeight = canvas.height;
+    drawBackground();
+    drawHouseFront();
+    drawHouseLeft();
+    drawRoof();
+    drawClouds();
+    drawSmoke();
+    drawChimney();
 }

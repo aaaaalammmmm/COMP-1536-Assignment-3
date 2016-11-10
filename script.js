@@ -16,6 +16,7 @@ function start() {
     drawHouseFront();
     drawHouseLeft();
     drawRoof();
+    drawChimney();
 }
 
 function drawBackground() {
@@ -103,6 +104,23 @@ function drawRoof() {
     ctx.lineTo(roofRightX, roofRightY);
     ctx.lineTo(roofLeftX, roofLeftY);
     ctx.fillStyle = "#E61029";
+    ctx.fill();
+    ctx.closePath();
+}
+
+function drawChimney() {
+    var chimneyLeft = 180;
+    var chimneyMiddle = chimneyLeft + 10;
+    var chimneyRight = chimneyMiddle + 20;
+    var chimneyBottom = 210;
+    
+    ctx.beginPath();
+    ctx.moveTo(chimneyLeft, chimneyBottom - 10);
+    ctx.lineTo(chimneyLeft, chimneyBottom - 60);
+    ctx.lineTo(chimneyMiddle, chimneyBottom - 80);
+    ctx.lineTo(chimneyMiddle, chimneyBottom);
+    ctx.lineTo(chimneyLeft, chimneyBottom - 10);
+    ctx.fillStyle = "purple";
     ctx.fill();
     ctx.closePath();
 }

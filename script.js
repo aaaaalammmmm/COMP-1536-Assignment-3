@@ -17,7 +17,7 @@ function drawBackground() {
     ctx.lineTo(canvasWidth, canvasHeight);
     ctx.lineTo(canvasWidth, rightPoint);
     ctx.lineTo(0, leftPoint);
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "#0AD12F";
     ctx.fill();
     ctx.closePath();
     
@@ -27,7 +27,7 @@ function drawBackground() {
     ctx.lineTo(0, 0);
     ctx.lineTo(canvasWidth, 0);
     ctx.lineTo(canvasWidth, rightPoint);
-    ctx.fillStyle = "cyan";
+    ctx.fillStyle = "#8CF0FF";
     ctx.fill();
     ctx.closePath();
 }
@@ -179,15 +179,30 @@ function drawClouds(x, y) {
 }
 
 function drawWindows() {
-    var windowLeft = 240;
-    var windowRight = 310;
+    var window1Left = 240;
+    var window1Right = 310;
+    
+    var window2Left = 70;
+    var window2Right = 110;
     
     ctx.beginPath();
-    ctx.moveTo(windowLeft, 320);
-    ctx.lineTo(windowLeft, 280);
-    ctx.lineTo(windowRight, 275);
-    ctx.lineTo(windowRight, 310);
-    ctx.lineTo(windowLeft - 2, 320);
+    ctx.moveTo(window1Left, 320);
+    ctx.lineTo(window1Left, 280);
+    ctx.lineTo(window1Right, 275);
+    ctx.lineTo(window1Right, 310);
+    ctx.lineTo(window1Left - 2, 320);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
+    ctx.fillStyle = "cyan";
+    ctx.fill();
+    ctx.closePath();
+    
+    ctx.beginPath();
+    ctx.moveTo(window2Left, 300);
+    ctx.lineTo(window2Left, 250);
+    ctx.lineTo(window2Right, 260);
+    ctx.lineTo(window2Right, 310);
+    ctx.lineTo(window2Left, 300)
     ctx.lineWidth = borderWidth1;
     ctx.stroke();
     ctx.fillStyle = "cyan";

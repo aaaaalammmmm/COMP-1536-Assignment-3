@@ -6,8 +6,6 @@ var ctx;
 var canvasWidth;
 var canvasHeight;
 
-
-
 function drawBackground() {
     var rightPoint = 225;
     var leftPoint  = 200;
@@ -97,6 +95,33 @@ function drawRoof() {
     ctx.closePath();
 }
 
+function drawChimney() {
+    var chimneyLeft = 180;
+    var chimneyMiddle = chimneyLeft + 15;
+    var chimneyRight = chimneyMiddle + 30;
+    var chimneyBottom = 210;
+    
+    ctx.beginPath();
+    ctx.moveTo(chimneyLeft, chimneyBottom - 10);
+    ctx.lineTo(chimneyLeft, chimneyBottom - 60);
+    ctx.lineTo(chimneyMiddle, chimneyBottom - 70);
+    ctx.lineTo(chimneyMiddle, chimneyBottom);
+    ctx.lineTo(chimneyLeft, chimneyBottom - 10);
+    ctx.fillStyle = "purple";
+    ctx.fill();
+    ctx.closePath();
+    
+    ctx.beginPath();
+    ctx.moveTo(chimneyMiddle, chimneyBottom);
+    ctx.lineTo(chimneyMiddle, chimneyBottom - 70);
+    ctx.lineTo(chimneyRight, chimneyBottom - 65);
+    ctx.lineTo(chimneyRight, chimneyBottom - 2);
+    ctx.lineTo(chimneyMiddle, chimneyBottom);
+    ctx.fillStyle= "magenta";
+    ctx.fill();
+    ctx.closePath();
+}
+
 function drawSmoke() {
     var x = 50;
     var y = 50;
@@ -132,7 +157,7 @@ function drawClouds() {
     
 function start() {
     canvas = document.getElementById("myCanvas");
-    ctx    = canvas.getContext("2d");
+    ctx = canvas.getContext("2d");
     
     canvasWidth  = canvas.width;
     canvasHeight = canvas.height;
@@ -145,5 +170,5 @@ function start() {
     drawClouds();
     drawClouds();
     drawSmoke();
+    drawChimney();
 }
-

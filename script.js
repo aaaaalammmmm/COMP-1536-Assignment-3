@@ -6,23 +6,12 @@ var ctx;
 var canvasWidth;
 var canvasHeight;
 
-function start() {
-    canvas = document.getElementById("myCanvas");
-    ctx    = canvas.getContext("2d");
-    
-    canvasWidth  = canvas.width;
-    canvasHeight = canvas.height;
-    drawBackground();
-    drawHouseFront();
-    drawHouseLeft();
-    drawRoof();
-    drawClouds();
-}
+
 
 function drawBackground() {
-    
     var rightPoint = 225;
     var leftPoint  = 200;
+
     //Grass
     ctx.beginPath();
     ctx.moveTo(0, canvasHeight);
@@ -106,34 +95,49 @@ function drawRoof() {
     ctx.fillStyle = "#E61029";
     ctx.fill();
     ctx.closePath();
-    
-    function drawSmoke() {
-        var x = 50;
-        var y = 50;
-        var r = 50;
-            
-        ctx.save();
-        ctx.scale(1, 0.5);
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * MATH.PI);
-        ctx.restore();
-        ctx.fillStyle = "gery";
-        ctx.fill;
-        ctx.closePath();
-    }
-    
-    function drawClouds() {
-        var x = 0;
-        var y = 0;
-        var r = 50;
-            
-        ctx.save();
-        ctx.scale(1, 0.5);
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * MATH.PI);
-        ctx.restore();
-        ctx.fillStyle = "white";
-        ctx.fill;
-        ctx.closePath();
-    }
 }
+
+function drawSmoke() {
+    var x = 50;
+    var y = 50;
+    var r = 50;
+
+    ctx.save();
+    ctx.scale(1, 0.5);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.restore();
+    ctx.fillStyle = "gery";
+    ctx.fill();
+    ctx.closePath();
+}
+    
+function drawClouds() {
+    var x = 0;
+    var y = 0;
+    var r = 50;
+
+    ctx.save();
+    ctx.scale(1, 0.5);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.restore();
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+}
+    
+function start() {
+    canvas = document.getElementById("myCanvas");
+    ctx    = canvas.getContext("2d");
+    
+    canvasWidth  = canvas.width;
+    canvasHeight = canvas.height;
+    drawBackground();
+    drawHouseFront();
+    drawHouseLeft();
+    drawRoof();
+    drawClouds();
+    drawSmoke();
+}
+

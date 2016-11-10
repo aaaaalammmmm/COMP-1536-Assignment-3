@@ -122,6 +122,21 @@ function drawChimney() {
     ctx.closePath();
 }
 
+function drawDoor(){
+    var doorLeft = 170;
+    var doorRight = doorLeft + 40;
+    
+    ctx.beginPath();
+    ctx.moveTo(doorLeft, 355);
+    ctx.lineTo(doorLeft, 280);
+    ctx.lineTo(doorRight, 278);
+    ctx.lineTo(doorRight, 348);
+    ctx.lineTo(doorLeft, 355);
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.closePath();
+}
+
 function drawSmoke() {
     var x = 50;
     var y = 50;
@@ -165,4 +180,5 @@ function start() {
     drawClouds();
     drawSmoke();
     drawChimney();
+    drawDoor();
 }

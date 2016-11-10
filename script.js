@@ -5,6 +5,7 @@ var ctx;
 //Stores canvas width and height.
 var canvasWidth;
 var canvasHeight;
+var borderWidth1 = 3;
 
 function drawBackground() {
     var rightPoint = 225;
@@ -44,6 +45,8 @@ function drawHouseFront() {
     ctx.lineTo(frontRightX, topRightY);
     ctx.lineTo(frontRightX, topRightY + frontWallHeight - 25);
     ctx.lineTo(frontLeftX, topLeftY + frontWallHeight);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
     ctx.fillStyle = "#EDED77";
     ctx.fill();
     ctx.closePath();
@@ -65,7 +68,9 @@ function drawHouseLeft() {
     ctx.lineTo(leftSummitX, leftSummitY);
     ctx.lineTo(leftLeftX, middleLeftY);
     ctx.lineTo(leftLeftX, middleRightY + 80);
-    ctx.moveTo(leftRightX, middleRightY + 110);
+    ctx.lineTo(leftRightX, middleRightY + 110);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
     ctx.fillStyle = "#D1D169";
     ctx.fill();
     ctx.closePath();
@@ -90,6 +95,8 @@ function drawRoof() {
     ctx.lineTo(rightSummitX, rightSummitY);
     ctx.lineTo(roofRightX, roofRightY);
     ctx.lineTo(roofLeftX, roofLeftY);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
     ctx.fillStyle = "#E61029";
     ctx.fill();
     ctx.closePath();
@@ -107,6 +114,8 @@ function drawChimney() {
     ctx.lineTo(chimneyMiddle, chimneyBottom - 70);
     ctx.lineTo(chimneyMiddle, chimneyBottom);
     ctx.lineTo(chimneyLeft, chimneyBottom - 10);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
     ctx.fillStyle = "purple";
     ctx.fill();
     ctx.closePath();
@@ -117,6 +126,8 @@ function drawChimney() {
     ctx.lineTo(chimneyRight, chimneyBottom - 65);
     ctx.lineTo(chimneyRight, chimneyBottom - 2);
     ctx.lineTo(chimneyMiddle, chimneyBottom);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
     ctx.fillStyle= "magenta";
     ctx.fill();
     ctx.closePath();
@@ -132,6 +143,8 @@ function drawDoor(){
     ctx.lineTo(doorRight, 278);
     ctx.lineTo(doorRight, 348);
     ctx.lineTo(doorLeft, 355);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
     ctx.fillStyle = "blue";
     ctx.fill();
     ctx.closePath();
@@ -169,7 +182,24 @@ function drawClouds() {
     ctx.fill();
     ctx.closePath();
 }
+
+function drawWindows() {
+    var windowLeft = 240;
+    var windowRight = 310;
     
+    ctx.beginPath();
+    ctx.moveTo(windowLeft, 320);
+    ctx.lineTo(windowLeft, 280);
+    ctx.lineTo(windowRight, 275);
+    ctx.lineTo(windowRight, 310);
+    ctx.lineTo(windowLeft - 2, 320);
+    ctx.lineWidth = borderWidth1;
+    ctx.stroke();
+    ctx.fillStyle = "cyan";
+    ctx.fill();
+    ctx.closePath();
+}
+
 function start() {
     canvas = document.getElementById("myCanvas");
     ctx = canvas.getContext("2d");
@@ -187,4 +217,5 @@ function start() {
     drawSmoke();
     drawChimney();
     drawDoor();
+    drawWindows();
 }

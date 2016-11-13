@@ -1,3 +1,9 @@
+//Allows the browser to support animation
+window.requestAnimationFrame = window.requestAnimationFrame || 
+                               window.mozRequestAnimationFrame || 
+                               window.webkitRequestAnimationFrame || 
+                               window.msRequestAnimationFrame;
+
 //Canvas and context variables.
 var canvas;
 var ctx;
@@ -30,6 +36,8 @@ function drawBackground() {
     ctx.fillStyle = "#8CF0FF";
     ctx.fill();
     ctx.closePath();
+    
+    requestAnimationFrame(drawBackground);
 }
 
 function drawHouseFront() {
@@ -50,6 +58,8 @@ function drawHouseFront() {
     ctx.fillStyle = "#EDED77";
     ctx.fill();
     ctx.closePath();
+    
+    requestAnimationFrame(drawHouseFront);
 }
 
 function drawHouseLeft() {
@@ -74,6 +84,8 @@ function drawHouseLeft() {
     ctx.fillStyle = "#D1D169";
     ctx.fill();
     ctx.closePath();
+    
+    requestAnimationFrame(drawHouseLeft);
 }
 
 function drawRoof() {
@@ -100,6 +112,8 @@ function drawRoof() {
     ctx.fillStyle = "#E61029";
     ctx.fill();
     ctx.closePath();
+    
+    requestAnimationFrame(drawRoof);
 }
 
 function drawChimney() {
@@ -128,12 +142,14 @@ function drawChimney() {
     ctx.lineTo(chimneyMiddle, chimneyBottom);
     ctx.lineWidth = borderWidth1;
     ctx.stroke();
-    ctx.fillStyle= "magenta";
+    ctx.fillStyle = "magenta";
     ctx.fill();
     ctx.closePath();
+    
+    requestAnimationFrame(drawChimney);
 }
 
-function drawDoor(){
+function drawDoor() {
     var doorLeft = 170;
     var doorRight = doorLeft + 40;
     
@@ -148,11 +164,11 @@ function drawDoor(){
     ctx.fillStyle = "blue";
     ctx.fill();
     ctx.closePath();
+    
+    requestAnimationFrame(drawDoor);
 }
 
-function drawSmoke() {
-    var x = 50;
-    var y = 50;
+function drawSmoke(x, y) {
     var r = 50;
 
     ctx.save();
@@ -163,9 +179,13 @@ function drawSmoke() {
     ctx.fillStyle = "grey";
     ctx.fill();
     ctx.closePath();
-}
     
-function drawClouds(x, y) {
+    requestAnimationFrame(function () {drawSmoke (x, y)});
+}
+
+function drawClouds() {
+    var x = Math.floor((Math.random()) * 400 + 1);
+    var y = Math.floor((Math.random()) * 250 + 1);
     var r = 50;
 
     ctx.save();
@@ -173,9 +193,11 @@ function drawClouds(x, y) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.restore();
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "grey";
     ctx.fill();
     ctx.closePath();
+
+    requestAnimationFrame(drawClouds);
 }
 
 function drawWindows() {
@@ -202,24 +224,19 @@ function drawWindows() {
     ctx.lineTo(window2Left, 250);
     ctx.lineTo(window2Right, 260);
     ctx.lineTo(window2Right, 310);
-    ctx.lineTo(window2Left, 300)
+    ctx.lineTo(window2Left, 300);
     ctx.lineWidth = borderWidth1;
     ctx.stroke();
     ctx.fillStyle = "cyan";
     ctx.fill();
     ctx.closePath();
-}
-  
-function moveClouds() {
-    var x = Math.floor((Math.random()) * 300 + 1);
-    var y = Math.floor((Math.random()) * 300 + 1);
     
-    setInterval (drawClouds(x, y), 1000);
+    requestAnimationFrame(drawWindows);
 }
 
 function start() {
     canvas = document.getElementById("myCanvas");
-    ctx = canvas.getContext("2d");
+    ctx    = canvas.getContext("2d");
     
     canvasWidth  = canvas.width;
     canvasHeight = canvas.height;
@@ -227,11 +244,10 @@ function start() {
     drawHouseFront();
     drawHouseLeft();
     drawRoof();
-    moveClouds();
-    moveClouds();
-    moveClouds();
-    //drawSmoke();
     drawChimney();
     drawDoor();
     drawWindows();
+    drawClouds();
+    drawClouds();
+    drawClouds();
 }

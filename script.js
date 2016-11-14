@@ -14,11 +14,11 @@ var canvasHeight;
 var borderWidth1 = 3;
 
 //Animation timing
-var fps = 60;
+var fps = document.getElementById("range").value;
 var now;
-var then = Date.now();
-var interval = 1000/fps;
-var delta;
+var then     = Date.now();
+var interval = 1000 / fps;
+var delta; 
 
 //Draws the Grass and Sky
 function drawBackground() {
@@ -237,9 +237,10 @@ function drawClouds() {
     ctx.closePath();
 }
 
+//Variables for animateSmoke()
 var smokeX = 200;
 var smokeY = 100;
-var r   = 20;
+var r      = 20;
 
 //Draws the smoke that is billowing from the chimneys
 function animateSmoke() {

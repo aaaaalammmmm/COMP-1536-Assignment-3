@@ -16,7 +16,7 @@ var borderWidth1 = 3;
 //Used in controlling the frames per second of requestAnimationFrame
 var now;
 var then = Date.now();
-var delta; 
+var delta;
 
 //Draws the Grass and Sky
 function drawBackground() {

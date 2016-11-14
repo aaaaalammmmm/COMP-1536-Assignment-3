@@ -232,21 +232,24 @@ function drawClouds() {
 var smokeX = 200;
 var smokeY = 100;
 //Draws the smoke that is billowing from the chimneys
-function drawSmoke() {
+function animateSmoke() {
     var r = 20;
     
-   if ((smokeY < canvasHeight)) {
-    ctx.beginPath();
-    ctx.arc(smokeX, smokeY, r, 0, 2 * Math.PI);
-    ctx.restore();
-    ctx.fillStyle = "grey";
-    ctx.fill();
-    ctx.closePath();
-       smokeY--;
-       smokeX++;
-   }
-    
-    requestAnimationFrame(drawSmoke);
+    if(smokeY > 0) {
+        ctx.beginPath();
+        ctx.arc(smokeX, smokeY, r, 0, 2 * Math.PI);
+        ctx.restore();
+        ctx.fillStyle = "grey";
+        ctx.fill();
+        ctx.closePath();
+        smokeY--;
+        smokeX++;
+    requestAnimationFrame(animateSmoke);
+    } else {
+        smokeX = 200;
+        smokeY = 100;
+        requestAnimationFrame(animateSmoke);
+    }
 }
 
 //Draws the house by calling all of the methods in the script
@@ -266,5 +269,5 @@ function start() {
     drawClouds();
     drawClouds();
     drawClouds();
-    drawSmoke();
+    animateSmoke();
 }

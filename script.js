@@ -14,14 +14,15 @@ var canvasHeight;
 var borderWidth1 = 3;
 
 //Animation timing
-var fps = document.getElementById("range").value;
 var now;
 var then     = Date.now();
-var interval = 1000 / fps;
 var delta; 
 
 //Draws the Grass and Sky
 function drawBackground() {
+    var fps = document.getElementById("range").value;
+    var interval = 1000 / fps;
+    
     requestAnimationFrame(drawBackground);
     var rightPoint = 225;
     var leftPoint  = 200;
@@ -244,6 +245,8 @@ var r      = 20;
 
 //Draws the smoke that is billowing from the chimneys
 function animateSmoke() {
+    var fps = document.getElementById("range").value;
+    var interval = 1000 / fps;
     requestAnimationFrame(animateSmoke);
     
     now   = Date.now();

@@ -13,32 +13,43 @@ var canvasWidth;
 var canvasHeight;
 var borderWidth1 = 3;
 
+//Animation timing
+var fps = 60;
+var now;
+var then = Date.now();
+var interval = 1000/fps;
+var delta;
+
 //Draws the Grass and Sky
 function drawBackground() {
+    requestAnimationFrame(drawBackground);
     var rightPoint = 225;
     var leftPoint  = 200;
 
-    //Grass
-    ctx.beginPath();
-    ctx.moveTo(0, canvasHeight);
-    ctx.lineTo(canvasWidth, canvasHeight);
-    ctx.lineTo(canvasWidth, rightPoint);
-    ctx.lineTo(0, leftPoint);
-    ctx.fillStyle = "#0AD12F";
-    ctx.fill();
-    ctx.closePath();
-    
-    //Sky
-    ctx.beginPath();
-    ctx.moveTo(0, leftPoint);
-    ctx.lineTo(0, 0);
-    ctx.lineTo(canvasWidth, 0);
-    ctx.lineTo(canvasWidth, rightPoint);
-    ctx.fillStyle = "#8CF0FF";
-    ctx.fill();
-    ctx.closePath();
-    
-    requestAnimationFrame(drawBackground);
+    now   = Date.now();
+    delta = now - then;
+
+    if (delta > interval) {
+        //Grass
+        ctx.beginPath();
+        ctx.moveTo(0, canvasHeight);
+        ctx.lineTo(canvasWidth, canvasHeight);
+        ctx.lineTo(canvasWidth, rightPoint);
+        ctx.lineTo(0, leftPoint);
+        ctx.fillStyle = "#0AD12F";
+        ctx.fill();
+        ctx.closePath();
+
+        //Sky
+        ctx.beginPath();
+        ctx.moveTo(0, leftPoint);
+        ctx.lineTo(0, 0);
+        ctx.lineTo(canvasWidth, 0);
+        ctx.lineTo(canvasWidth, rightPoint);
+        ctx.fillStyle = "#8CF0FF";
+        ctx.fill();
+        ctx.closePath();
+    }
 }
 
 //Draws the front of the house
@@ -211,8 +222,7 @@ function drawWindows() {
 
 //Draws the clouds
 function drawClouds() {
-  //  var x = Math.floor((Math.random()) * 400 + 1);
-//    var y = Math.floor((Math.random()) * 250 + 1);
+    requestAnimationFrame(drawClouds);
     var x = 100;
     var y = 100;
     var r = 50;
@@ -225,30 +235,34 @@ function drawClouds() {
     ctx.fillStyle = "white";
     ctx.fill();
     ctx.closePath();
-
-    requestAnimationFrame(drawClouds);
 }
 
 var smokeX = 200;
 var smokeY = 100;
+var r   = 20;
+
 //Draws the smoke that is billowing from the chimneys
 function animateSmoke() {
-    var r = 20;
-    
-    if(smokeY > 0) {
-        ctx.beginPath();
-        ctx.arc(smokeX, smokeY, r, 0, 2 * Math.PI);
-        ctx.restore();
-        ctx.fillStyle = "grey";
-        ctx.fill();
-        ctx.closePath();
-        smokeY--;
-        smokeX++;
     requestAnimationFrame(animateSmoke);
-    } else {
-        smokeX = 200;
-        smokeY = 100;
-        requestAnimationFrame(animateSmoke);
+    
+    now   = Date.now();
+    delta = now - then;
+
+    if (delta > interval) {
+            then = now - (delta % interval);
+            if(smokeY > -20){
+            ctx.beginPath();
+            ctx.arc(smokeX, smokeY, r, 0, 2 * Math.PI);
+            ctx.restore();
+            ctx.fillStyle = "grey";
+            ctx.fill();
+            ctx.closePath();
+            smokeY--;
+            smokeX++;
+        } else {
+            smokeX = 200;
+            smokeY = 100;
+        }
     }
 }
 
@@ -266,8 +280,6 @@ function start() {
     drawChimney();
     drawDoor();
     drawWindows();
-    drawClouds();
-    drawClouds();
     drawClouds();
     animateSmoke();
 }

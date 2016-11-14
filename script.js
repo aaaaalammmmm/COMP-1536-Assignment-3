@@ -1,4 +1,4 @@
-//Allows the browser to support animation
+//Tells the browser to support animation
 window.requestAnimationFrame = window.requestAnimationFrame || 
                                window.mozRequestAnimationFrame || 
                                window.webkitRequestAnimationFrame || 
@@ -13,24 +13,26 @@ var canvasWidth;
 var canvasHeight;
 var borderWidth1 = 3;
 
-//Animation timing
+//Used in controlling the frames per second of requestAnimationFrame
 var now;
-var then     = Date.now();
+var then = Date.now();
 var delta; 
 
 //Draws the Grass and Sky
 function drawBackground() {
-    var fps = document.getElementById("range").value;
-    var interval = 1000 / fps;
-    
-    requestAnimationFrame(drawBackground);
+    //fps is dictated by the range input in the index.html file
+    var fps        = document.getElementById("range").value;
+    var interval   = 1000 / fps; //The calculated duration of a frame
     var rightPoint = 225;
     var leftPoint  = 200;
+    requestAnimationFrame(drawBackground);
 
-    now   = Date.now();
-    delta = now - then;
+    now   = Date.now(); //The time at function call
+    delta = now - then; //Stores the actual time between this call and the previous
 
-    if (delta > interval) {
+    //If the actual time between call is greater than the
+    //calculated duration of a frame, draw.
+    if (delta >= interval) {
         //Grass
         ctx.beginPath();
         ctx.moveTo(0, canvasHeight);
@@ -245,32 +247,39 @@ var r      = 20;
 
 //Draws the smoke that is billowing from the chimneys
 function animateSmoke() {
-    var fps = document.getElementById("range").value;
-    var interval = 1000 / fps;
+    //fps is dictated by the range input in the index.html file
+    var fps      = document.getElementById("range").value;
+    var interval = 1000 / fps; //The calculated duration of each frame
     requestAnimationFrame(animateSmoke);
     
-    now   = Date.now();
-    delta = now - then;
+    now   = Date.now(); //The time at function call
+    delta = now - then; //Stores the actual time between function calls
 
-    if (delta > interval) {
-            then = now - (delta % interval);
-            if(smokeY > -20){
+    //If the actual time between call is greater than the
+    //calculated duration of a frame, draw.
+    if (delta >= interval) {
+        //Sets it to current time, but accounting for shifts in
+        //the frames per second
+        then = now - (delta % interval);
+        //If the circle isn't out of bound, draw the circle
+        if(smokeY > -20){
             ctx.beginPath();
             ctx.arc(smokeX, smokeY, r, 0, 2 * Math.PI);
             ctx.restore();
             ctx.fillStyle = "grey";
             ctx.fill();
             ctx.closePath();
-            smokeY--;
-            smokeX++;
+            smokeY--; //Makes the circle approach the top of the canvas
+            smokeX++; //Makes the circle approach the right of the canvas
         } else {
+            //If out of bound, reset x and y
             smokeX = 200;
             smokeY = 100;
         }
     }
 }
 
-//Draws the house by calling all of the methods in the script
+//Draws the house by calling all of the previous methods in the script
 function start() {
     canvas = document.getElementById("myCanvas");
     ctx    = canvas.getContext("2d");

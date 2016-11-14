@@ -13,6 +13,7 @@ var canvasWidth;
 var canvasHeight;
 var borderWidth1 = 3;
 
+//Draws the Grass and Sky
 function drawBackground() {
     var rightPoint = 225;
     var leftPoint  = 200;
@@ -40,6 +41,7 @@ function drawBackground() {
     requestAnimationFrame(drawBackground);
 }
 
+//Draws the front of the house
 function drawHouseFront() {
     var frontLeftX      = 140;
     var frontRightX     = 340;
@@ -62,6 +64,7 @@ function drawHouseFront() {
     requestAnimationFrame(drawHouseFront);
 }
 
+//Draws the left side of the house
 function drawHouseLeft() {
     var leftLeftX  = 50;
     var leftRightX = 140;
@@ -88,6 +91,7 @@ function drawHouseLeft() {
     requestAnimationFrame(drawHouseLeft);
 }
 
+//Draws the roof of the house
 function drawRoof() {
     var leftSummitX = 80;
     var leftSummitY = 180;
@@ -116,6 +120,7 @@ function drawRoof() {
     requestAnimationFrame(drawRoof);
 }
 
+//Draws the chimney of the house
 function drawChimney() {
     var chimneyLeft = 180;
     var chimneyMiddle = chimneyLeft + 15;
@@ -149,6 +154,7 @@ function drawChimney() {
     requestAnimationFrame(drawChimney);
 }
 
+//Draws the doors of the house
 function drawDoor() {
     var doorLeft = 170;
     var doorRight = doorLeft + 40;
@@ -168,38 +174,7 @@ function drawDoor() {
     requestAnimationFrame(drawDoor);
 }
 
-function drawSmoke(x, y) {
-    var r = 50;
-
-    ctx.save();
-    ctx.scale(1, 0.5);
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, 2 * Math.PI);
-    ctx.restore();
-    ctx.fillStyle = "grey";
-    ctx.fill();
-    ctx.closePath();
-    
-    requestAnimationFrame(function () {drawSmoke (x, y)});
-}
-
-function drawClouds() {
-    var x = Math.floor((Math.random()) * 400 + 1);
-    var y = Math.floor((Math.random()) * 250 + 1);
-    var r = 50;
-
-    ctx.save();
-    ctx.scale(1, 0.5);
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, 2 * Math.PI);
-    ctx.restore();
-    ctx.fillStyle = "grey";
-    ctx.fill();
-    ctx.closePath();
-
-    requestAnimationFrame(drawClouds);
-}
-
+//Draws the windows of the house
 function drawWindows() {
     var window1Left = 240;
     var window1Right = 310;
@@ -234,6 +209,47 @@ function drawWindows() {
     requestAnimationFrame(drawWindows);
 }
 
+//Draws the clouds
+function drawClouds() {
+  //  var x = Math.floor((Math.random()) * 400 + 1);
+//    var y = Math.floor((Math.random()) * 250 + 1);
+    var x = 100;
+    var y = 100;
+    var r = 50;
+
+    ctx.save();
+    ctx.scale(1, 0.5);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.restore();
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+
+    requestAnimationFrame(drawClouds);
+}
+
+var smokeX = 200;
+var smokeY = 100;
+//Draws the smoke that is billowing from the chimneys
+function drawSmoke() {
+    var r = 20;
+    
+   if ((smokeY < canvasHeight)) {
+    ctx.beginPath();
+    ctx.arc(smokeX, smokeY, r, 0, 2 * Math.PI);
+    ctx.restore();
+    ctx.fillStyle = "grey";
+    ctx.fill();
+    ctx.closePath();
+       smokeY--;
+       smokeX++;
+   }
+    
+    requestAnimationFrame(drawSmoke);
+}
+
+//Draws the house by calling all of the methods in the script
 function start() {
     canvas = document.getElementById("myCanvas");
     ctx    = canvas.getContext("2d");
@@ -250,4 +266,5 @@ function start() {
     drawClouds();
     drawClouds();
     drawClouds();
+    drawSmoke();
 }
